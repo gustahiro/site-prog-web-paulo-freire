@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><base href="https://d16ilfvy4mv02r.cloudfront.net/workspaces/UoEouGQWbpTFOGyIO5mjPJzxvWXuyNZL/db3f66bc-3c7c-4b7a-9664-bf3c83e20604/files/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lixo Eletrônico – E-Waste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ee:cubic-bezier(0.19,1,0.22,1);
+  --eq:cubic-bezier(0.77,0,0.175,1);
+  --es:cubic-bezier(0.34,1.56,0.64,1);
+  --bg:#060d08;
+  --bg-2:#0a1410;
+  --ink:#ffffff;
+  --ink-2:rgba(255,255,255,.75);
+  --ink-3:rgba(255,255,255,.5);
+  --ink-4:rgba(255,255,255,.3);
+  --line:rgba(255,255,255,.1);
+  --line-2:rgba(255,255,255,.06);
+  --glass-bg:linear-gradient(135deg,rgba(74,222,128,.06),rgba(255,255,255,.02));
+  --glass-border:rgba(74,222,128,.15);
+  --glass-blur:blur(40px);
+  --green:#4ade80;
+  --green-soft:#86efac;
+  --yellow:#facc15;
+  --yellow-soft:#fef08a;
+  --orange:#fb923c;
+  --red:#f87171;
+  --cyan:#22d3ee;
+  --grad-a:linear-gradient(135deg,#fff 0%,#86efac 50%,#facc15 100%);
+  --grad-b:linear-gradient(135deg,#4ade80,#facc15);
+  --grad-c:linear-gradient(90deg,#4ade80,#86efac);
+  --font-sans:'Space Grotesk',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --r-sm:10px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-xl:28px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%;background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+
+.deck::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(circle at 15% 20%,rgba(74,222,128,.18) 0%,transparent 50%),
+  radial-gradient(circle at 85% 80%,rgba(250,204,21,.12) 0%,transparent 50%),
+  radial-gradient(circle at 50% 50%,rgba(34,211,238,.06) 0%,transparent 60%);
+  z-index:0;animation:ambient 14s ease-in-out infinite alternate;pointer-events:none}
+@keyframes ambient{to{opacity:.7;transform:scale(1.05)}}
+.deck::after{content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(74,222,128,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,.02) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse at center,black 25%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at center,black 25%,transparent 80%);
+  z-index:0;pointer-events:none}
+
+.deck{position:fixed;inset:0;overflow:hidden}
+
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s var(--eq),visibility .9s;z-index:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.slide.active{opacity:1;visibility:visible;transition-delay:.4s}
+.slide.exiting{transition-delay:0s}
+.slide-inner{min-height:100%;padding:90px 6vmin 80px;display:flex;flex-direction:column;position:relative}
+
+/* Persistent chrome */
+.brand{position:fixed;top:28px;left:32px;z-index:100;display:flex;align-items:center;gap:11px;font-family:var(--font-sans);font-weight:600;font-size:16px;letter-spacing:-.01em}
+.brand .logo{width:28px;height:28px;border-radius:8px;background:var(--grad-b);position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px}
+.brand .logo-inner{position:absolute;inset:5px;background:var(--bg);border-radius:4px}
+
+.nav{position:fixed;top:24px;right:24px;display:flex;gap:6px;align-items:center;z-index:100;font-family:var(--font-mono)}
+.nav button{background:rgba(74,222,128,.1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(74,222,128,.25);color:var(--ink);cursor:pointer;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;font-family:inherit;font-size:13px;transition:all .25s}
+.nav button:hover{background:rgba(74,222,128,.25);transform:scale(1.06)}
+.counter{font-size:11px;letter-spacing:.18em;padding:0 14px;color:var(--ink);min-width:62px;text-align:center;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);height:34px;display:flex;align-items:center;justify-content:center;border-radius:100px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+
+.section-tag{position:fixed;bottom:28px;left:32px;z-index:100;font-family:var(--font-mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:10px;align-items:center;pointer-events:none}
+.section-tag .pip{width:5px;height:5px;border-radius:50%;background:var(--green-soft);box-shadow:0 0 10px var(--green);animation:pip 2s infinite}
+@keyframes pip{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Menu */
+.menu-btn .icon{display:flex;flex-direction:column;gap:3px;align-items:center}
+.menu-btn .icon i{display:block;width:14px;height:1.5px;background:currentColor;border-radius:1px;transition:all .3s var(--ee)}
+.menu-btn.open .icon i:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
+.menu-btn.open .icon i:nth-child(2){opacity:0;transform:scaleX(0)}
+.menu-btn.open .icon i:nth-child(3){transform:translateY(-4.5px) rotate(-45deg)}
+
+.menu-overlay{position:fixed;inset:0;background:rgba(6,13,8,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:200;opacity:0;visibility:hidden;transition:opacity .35s var(--ee),visibility .35s}
+.menu-overlay.open{opacity:1;visibility:visible}
+.menu-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.96);width:min(560px,92vw);max-height:84vh;overflow-y:auto;background:linear-gradient(180deg,rgba(10,20,12,.97) 0%,rgba(6,13,8,.97) 100%);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(74,222,128,.2);border-radius:24px;z-index:201;opacity:0;visibility:hidden;transition:opacity .4s var(--ee),visibility .4s,transform .5s var(--es);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(74,222,128,.1)}
+.menu-panel.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.menu-header{padding:24px 28px 20px;border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center}
+.menu-header h3{font-family:var(--font-sans);font-weight:500;font-size:17px}
+.menu-header .menu-meta{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.menu-list{padding:12px 12px 20px;display:flex;flex-direction:column;gap:2px}
+.menu-item{display:flex;align-items:center;gap:18px;padding:14px 18px;border-radius:14px;cursor:pointer;transition:all .25s var(--ee);border:1px solid transparent}
+.menu-item:hover{background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.2)}
+.menu-item.current{background:linear-gradient(90deg,rgba(74,222,128,.15),rgba(250,204,21,.06));border-color:rgba(74,222,128,.3)}
+.menu-item .mi-num{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.15em;width:28px;flex-shrink:0}
+.menu-item.current .mi-num{color:var(--green-soft)}
+.menu-item .mi-label{font-family:var(--font-sans);font-weight:500;font-size:15px;flex:1}
+.menu-item .mi-sub{font-family:var(--font-body);font-size:12px;color:var(--ink-3);margin-top:2px}
+.menu-item .mi-arr{color:var(--ink-4);font-size:14px;transition:all .25s}
+.menu-item:hover .mi-arr{color:var(--ink);transform:translateX(3px)}
+.menu-item.current .mi-arr{color:var(--green-soft)}
+.menu-footer{padding:14px 28px 22px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+
+/* Utilities */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ee),transform 1s var(--ee)}
+.slide.active .reveal{opacity:1;transform:translateY(0)}
+.slide.active .reveal:nth-of-type(1){transition-delay:.5s}
+.slide.active .reveal:nth-of-type(2){transition-delay:.65s}
+.slide.active .reveal:nth-of-type(3){transition-delay:.8s}
+.slide.active .reveal:nth-of-type(4){transition-delay:.95s}
+.slide.active .reveal:nth-of-type(5){transition-delay:1.1s}
+.slide.active .reveal:nth-of-type(6){transition-delay:1.25s}
+.slide.active .reveal:nth-of-type(7){transition-delay:1.4s}
+.slide.active .reveal:nth-of-type(8){transition-delay:1.55s}
+
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);padding:7px 16px;border-radius:100px;font-family:var(--font-body);font-size:12px;color:var(--green-soft);width:fit-content;letter-spacing:.02em}
+.eyebrow .dt{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pip 2s infinite}
+
+.h-display{font-family:var(--font-sans);font-weight:500;line-height:1.02;letter-spacing:-.035em}
+.h-display .grd{background:var(--grad-a);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.body-lg{font-family:var(--font-body);font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:var(--ink-2)}
+.body-md{font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--ink-2)}
+.body-sm{font-family:var(--font-body);font-size:12px;line-height:1.5;color:var(--ink-3)}
+
+.btn-primary{background:var(--green);color:#06100a;padding:13px 24px;border-radius:100px;font-family:var(--font-body);font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:all .3s;border:none;text-decoration:none}
+.btn-primary:hover{background:var(--green-soft);transform:translateY(-2px);box-shadow:0 10px 30px rgba(74,222,128,.3)}
+.btn-secondary{background:rgba(74,222,128,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--ink);padding:13px 24px;border-radius:100px;font-family:var(--font-body);font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:all .3s;border:1px solid rgba(74,222,128,.2);text-decoration:none}
+.btn-secondary:hover{background:rgba(74,222,128,.12)}
+
+.glass-card{background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:var(--r-lg);position:relative;overflow:hidden}
+
+/* === SLIDE 1 — COVER === */
+.s-cover{align-items:center;justify-content:center;text-align:center;padding:90px 6vmin 80px}
+.s-cover-inner{max-width:1100px;width:100%;display:flex;flex-direction:column;align-items:center;gap:32px;position:relative;margin:auto 0}
+.s-cover-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:140%;background:radial-gradient(ellipse,rgba(74,222,128,.2),transparent 60%);filter:blur(60px);z-index:-1;animation:coverPulse 6s ease-in-out infinite alternate}
+@keyframes coverPulse{to{opacity:.7;transform:translate(-50%,-50%) scale(1.1)}}
+.s-cover h1{font-size:clamp(54px,8vw,130px)}
+.s-cover h1 .line{display:block;overflow:hidden}
+.s-cover h1 .line>span{display:inline-block;transform:translateY(110%);transition:transform 1.4s var(--ee)}
+.slide.active .s-cover h1 .line>span{transform:translateY(0)}
+.slide.active .s-cover h1 .line:nth-child(1)>span{transition-delay:.5s}
+.slide.active .s-cover h1 .line:nth-child(2)>span{transition-delay:.7s}
+.s-cover-meta{display:flex;gap:32px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:8px;font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.s-cover-meta .sep{width:24px;height:1px;background:var(--ink-4)}
+.s-cover-cta{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;justify-content:center}
+.s-cover-version{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.3em;text-transform:uppercase;white-space:nowrap}
+
+/* === SLIDE 2 — O QUE É === */
+.s-problem{justify-content:center}
+.s-problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vmin;align-items:center;flex:1}
+.s-problem-left{padding-left:2vmin;display:flex;flex-direction:column;gap:24px}
+.s-problem h2{font-size:clamp(36px,5vw,70px)}
+.s-problem h2 em{font-style:normal;background:linear-gradient(135deg,var(--yellow-soft),var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent}
+.s-problem-right{display:flex;flex-direction:column;gap:14px}
+.problem-card{padding:22px 24px;display:flex;gap:18px;align-items:flex-start;transition:all .4s var(--ee)}
+.problem-card:hover{border-color:rgba(74,222,128,.3);transform:translateX(6px)}
+.problem-card .pc-num{font-family:var(--font-mono);font-size:11px;color:var(--green-soft);letter-spacing:.15em;flex-shrink:0;margin-top:5px;width:24px}
+.problem-card .pc-body h3{font-family:var(--font-sans);font-weight:500;font-size:17px;margin-bottom:6px}
+.problem-card .pc-body p{font-family:var(--font-body);font-size:13px;line-height:1.55;color:var(--ink-3)}
+.problem-card .pc-icon{font-size:22px;color:var(--ink-4);margin-left:auto;align-self:center}
+
+/* === SLIDE 3 — EXEMPLOS === */
+.s-examples{justify-content:center}
+.s-examples h2{font-size:clamp(36px,5vw,68px);margin-top:18px}
+.examples-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:4px}
+.ex-card{padding:24px 20px;display:flex;flex-direction:column;gap:12px;transition:all .4s var(--ee)}
+.ex-card:hover{border-color:rgba(250,204,21,.35);transform:translateY(-4px)}
+.ex-card .ex-icon{font-size:28px;margin-bottom:4px}
+.ex-card h3{font-family:var(--font-sans);font-weight:500;font-size:16px}
+.ex-card p{font-family:var(--font-body);font-size:12.5px;color:var(--ink-3);line-height:1.5}
+
+/* === SLIDE 4 — MEIO AMBIENTE === */
+.s-env{justify-content:center}
+.s-env h2{font-size:clamp(36px,5vw,68px);margin-top:18px}
+.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:4px}
+.env-card{padding:26px 24px;display:flex;flex-direction:column;gap:14px;transition:all .4s var(--ee)}
+.env-card:hover{border-color:rgba(251,146,60,.4);transform:translateY(-4px)}
+.env-card .ev-ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:20px;background:rgba(251,146,60,.12);flex-shrink:0}
+.env-card h3{font-family:var(--font-sans);font-weight:500;font-size:17px}
+.env-card p{font-family:var(--font-body);font-size:13px;color:var(--ink-2);line-height:1.6;flex:1}
+.env-stat{display:inline-block;font-family:var(--font-mono);font-size:11px;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.3);color:var(--orange);padding:4px 12px;border-radius:100px;letter-spacing:.05em}
+
+/* === SLIDE 5 — SAÚDE === */
+.s-health{justify-content:center;gap:4vmin}
+.s-health-head h2{font-size:clamp(34px,4.8vw,66px);margin-top:18px}
+.s-health-head p{margin-top:16px;max-width:660px}
+.health-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.health-card{padding:24px 26px;display:flex;flex-direction:column;gap:12px;transition:all .4s var(--ee)}
+.health-card:hover{border-color:rgba(248,113,113,.35);transform:translateY(-3px)}
+.health-card .hc-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);padding:4px 12px;border-radius:100px;width:fit-content}
+.health-card h3{font-family:var(--font-sans);font-weight:500;font-size:17px}
+.health-card p{font-family:var(--font-body);font-size:13px;color:var(--ink-2);line-height:1.6}
+
+/* === SLIDE 6 — RECICLAGEM === */
+.s-recycle{gap:4vmin;justify-content:center}
+.s-recycle-head h2{font-size:clamp(34px,4.8vw,64px);margin-top:18px}
+.timeline{position:relative;padding:0 0 10px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.timeline::before{content:'';position:absolute;top:31px;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,var(--green) 15%,var(--yellow) 50%,var(--orange) 85%,transparent);opacity:.5}
+.tl-item{position:relative;padding:60px 18px 20px;display:flex;flex-direction:column;gap:10px}
+.tl-item::before{content:'';position:absolute;top:22px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--green);z-index:2}
+.tl-item:nth-child(2)::before{border-color:var(--yellow)}
+.tl-item:nth-child(3)::before{border-color:var(--orange)}
+.tl-item:nth-child(4)::before{border-color:var(--cyan)}
+.tl-item.now::before{background:var(--green);box-shadow:0 0 0 6px rgba(74,222,128,.2),0 0 20px var(--green);animation:pip 2s infinite}
+.tl-quarter{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--green-soft);text-align:center}
+.tl-item:nth-child(2) .tl-quarter{color:var(--yellow-soft)}
+.tl-item:nth-child(3) .tl-quarter{color:var(--orange)}
+.tl-item:nth-child(4) .tl-quarter{color:var(--cyan)}
+.tl-status{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:10px;color:var(--ink-3);justify-content:center;margin-top:-4px}
+.tl-status .s-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.tl-item:nth-child(2) .tl-status .s-dot{background:var(--yellow)}
+.tl-item:nth-child(3) .tl-status .s-dot{background:var(--orange)}
+.tl-item:nth-child(4) .tl-status .s-dot{background:var(--cyan)}
+.tl-card{padding:18px 20px;background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:14px;flex:1;display:flex;flex-direction:column;gap:10px;transition:all .35s var(--ee)}
+.tl-card:hover{transform:translateY(-4px);border-color:rgba(74,222,128,.3)}
+.tl-card h3{font-family:var(--font-sans);font-weight:500;font-size:16px}
+.tl-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.tl-card li{font-family:var(--font-body);font-size:12px;color:var(--ink-2);padding-left:16px;position:relative;line-height:1.45}
+.tl-card li::before{content:'\2014';position:absolute;left:0;color:var(--green-soft);font-weight:300}
+
+/* === SLIDE 7 — DESCARTE === */
+.s-disposal{gap:4vmin;justify-content:center}
+.s-disposal-head h2{font-size:clamp(34px,4.8vw,64px);margin-top:18px}
+.disposal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.disposal-card{padding:28px 22px;display:flex;flex-direction:column;gap:14px;text-align:center;transition:all .4s var(--ee);align-items:center}
+.disposal-card:hover{transform:translateY(-5px)}
+.disposal-card .dc-circle{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:22px;margin-bottom:4px;flex-shrink:0}
+.disposal-card.verde .dc-circle{background:rgba(74,222,128,.15);border:2px solid rgba(74,222,128,.4)}
+.disposal-card.marrom .dc-circle{background:rgba(161,84,37,.3);border:2px solid rgba(180,100,40,.5)}
+.disposal-card.azul .dc-circle{background:rgba(34,211,238,.12);border:2px solid rgba(34,211,238,.35)}
+.disposal-card.branco .dc-circle{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25)}
+.disposal-card.verde{border-color:rgba(74,222,128,.25)!important}
+.disposal-card.marrom{border-color:rgba(161,84,37,.4)!important}
+.disposal-card.azul{border-color:rgba(34,211,238,.25)!important}
+.disposal-card.branco{border-color:rgba(255,255,255,.15)!important}
+.disposal-card h3{font-family:var(--font-sans);font-weight:600;font-size:18px}
+.disposal-card .dc-line{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:4px}
+.disposal-card.verde .dc-line{color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3)}
+.disposal-card.marrom .dc-line{color:#d97706;background:rgba(161,84,37,.15);border:1px solid rgba(161,84,37,.4)}
+.disposal-card.azul .dc-line{color:var(--cyan);background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3)}
+.disposal-card.branco .dc-line{color:#e2e8f0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2)}
+.disposal-card p{font-family:var(--font-body);font-size:13px;color:var(--ink-3);line-height:1.5}
+.disposal-warn{margin-top:10px;padding:20px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.disposal-warn .dw-ic{font-size:26px;flex-shrink:0}
+.disposal-warn p{font-family:var(--font-body);font-size:14px;color:var(--ink-2);line-height:1.55}
+
+/* === SLIDE 8 — CURIOSIDADES === */
+.s-metrics{justify-content:center;gap:5vmin}
+.s-metrics-head h2{font-size:clamp(36px,5.2vw,72px);margin-top:18px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.metric{padding:28px 26px;display:flex;flex-direction:column;justify-content:space-between;min-height:180px;position:relative;overflow:hidden}
+.metric::before{content:'';position:absolute;top:-30%;right:-30%;width:160px;height:160px;background:radial-gradient(circle,rgba(74,222,128,.2),transparent 70%);filter:blur(30px);opacity:0;transition:opacity .8s}
+.metric:hover::before{opacity:1}
+.metric-num{font-family:var(--font-sans);font-weight:500;font-size:clamp(32px,4vw,54px);letter-spacing:-.04em;line-height:1}
+.metric-num.grd{background:var(--grad-a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.metric-num .unit{font-size:.5em;color:var(--ink-3);font-weight:400;margin-left:2px}
+.metric-lbl{font-family:var(--font-body);font-size:13px;color:var(--ink-2);line-height:1.45;margin-top:12px}
+.metric-icon{font-size:20px;margin-bottom:4px;color:var(--green-soft)}
+.s-metrics-bottom{display:flex;gap:18px;flex-wrap:wrap;margin-top:4px}
+.s-metrics-bottom .mb-fact{flex:1;min-width:240px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start}
+.mb-fact .mbf-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.mb-fact p{font-family:var(--font-body);font-size:13px;color:var(--ink-2);line-height:1.55}
+.mb-fact strong{color:var(--green-soft)}
+
+/* === SLIDE 9 — CTA / REFERÊNCIAS === */
+.s-cta{align-items:center;justify-content:center;text-align:center;padding:90px 6vmin 80px}
+.s-cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;height:120%;background:radial-gradient(ellipse,rgba(74,222,128,.15),transparent 60%);filter:blur(60px);z-index:-1;animation:coverPulse 6s ease-in-out infinite alternate}
+.s-cta-inner{max-width:880px;display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;margin:auto 0}
+.s-cta h2{font-size:clamp(42px,6.5vw,100px)}
+.s-cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.s-cta-refs{display:flex;flex-direction:column;gap:10px;margin-top:28px;padding-top:28px;border-top:1px solid var(--line);width:100%}
+.s-cta-refs h4{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.ref-item{display:flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:13px;color:var(--ink-2)}
+.ref-item .ref-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+.ref-item a{color:var(--green-soft);text-decoration:none;border-bottom:1px solid rgba(134,239,172,.3);transition:border-color .25s}
+.ref-item a:hover{border-color:var(--green-soft)}
+
+/* tm-credit */
+.tm-credit{position:fixed;bottom:28px;right:32px;z-index:100;font-family:var(--font-mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;display:flex;gap:8px;align-items:center;transition:color .25s}
+.tm-credit:hover{color:var(--ink)}
+.tm-credit .tm-dot{width:5px;height:5px;border-radius:50%;background:var(--yellow-soft);box-shadow:0 0 10px var(--yellow);animation:pip 2s infinite}
+.tm-credit .tm-label{opacity:.7}
+
+/* responsive */
+@media (max-width:1024px){
+  .s-problem-grid{grid-template-columns:1fr;gap:32px}
+  .examples-grid,.disposal-grid{grid-template-columns:repeat(2,1fr)}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:repeat(2,1fr)}
+  .timeline::before{display:none}
+  .health-grid{grid-template-columns:1fr}
+  .env-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  html,body{overflow:hidden}
+  .slide-inner,.s-cover,.s-cta{padding:72px 18px 24px}
+  .brand{top:18px;left:18px;font-size:14px}
+  .nav{top:16px;right:16px;gap:5px}
+  .nav button{width:32px;height:32px;font-size:12px}
+  .counter{padding:0 10px;font-size:10px;height:32px;min-width:54px}
+  .examples-grid,.disposal-grid,.metric-grid{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr;padding-top:10px}
+  .tl-item{padding:24px 16px 16px}
+  .tl-item::before{top:18px;left:0;transform:none}
+  .s-cover h1{font-size:44px}
+  .s-cta h2{font-size:38px}
+  .env-grid{grid-template-columns:1fr}
+  .section-tag,.tm-credit{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="brand">
+  <span class="logo">♻</span>
+  E-Waste
+</div>
+
+<div class="section-tag"><span class="pip"></span><span id="sectionName">Início</span></div>
+
+<a class="tm-credit" href="https://www.todamateria.com.br/" target="_blank" rel="nofollow noopener">
+  <span class="tm-dot"></span><span class="tm-label">todamateria.com.br</span>
+</a>
+
+<div class="nav">
+  <button id="prevBtn" title="Anterior">&#8592;</button>
+  <div class="counter"><span id="cur">1</span>&thinsp;/&thinsp;<span id="tot">9</span></div>
+  <button id="nextBtn" title="Próximo">&#8594;</button>
+  <button class="menu-btn" id="menuBtn" title="Menu"><span class="icon"><i></i><i></i><i></i></span></button>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1. COVER -->
+  <section class="slide active" data-section="Início" data-sub="Apresentação do tema">
+    <div class="slide-inner s-cover">
+      <div class="s-cover-inner">
+        <div class="s-cover-glow"></div>
+        <div class="eyebrow reveal"><span class="dt"></span>Educação ambiental · 2025</div>
+        <h1 class="h-display">
+          <span class="line"><span><span class="grd">Lixo Eletrônico</span></span></span>
+          <span class="line"><span>O problema que cresce</span></span>
+          <span class="line"><span>a cada clique.</span></span>
+        </h1>
+        <p class="body-lg reveal" style="max-width:700px">50 milhões de toneladas descartadas por ano. O Brasil é o 5º maior produtor do mundo. É hora de entender — e agir.</p>
+        <div class="s-cover-meta reveal">
+          <span>RAEE</span><span class="sep"></span>
+          <span>E-Lixo</span><span class="sep"></span>
+          <span>Impacto Real</span>
+        </div>
+        <div class="s-cover-cta reveal">
+          <a class="btn-primary" id="coverStart">Explorar o tema &darr;</a>
+          <a class="btn-secondary" id="coverRefs" data-goto="9">Ver referências</a>
+        </div>
+        <div class="s-cover-version">TRABALHO ESCOLAR &middot; LIXO ELETRÔNICO &middot; 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. O QUE É -->
+  <section class="slide" data-section="O que é" data-sub="Definição de lixo eletrônico">
+    <div class="slide-inner s-problem">
+      <div class="s-problem-grid">
+        <div class="s-problem-left">
+          <div class="eyebrow reveal"><span class="dt"></span>Definição</div>
+          <h2 class="h-display reveal">O que é o <em>Lixo Eletrônico</em>?</h2>
+          <p class="body-lg reveal">O lixo eletrônico <strong style="color:#fff">(e-lixo)</strong> ou tecnológico é aquele proveniente de materiais eletrônicos. Também conhecido pela sigla <strong style="color:var(--green-soft)">RAEE</strong> — Resíduos de Aparelhos Eletroeletrônicos.</p>
+          <p class="body-md reveal">São equipamentos que chegaram ao fim de sua vida útil ou tornaram-se obsoletos antes disso — descartados de forma incorreta, contaminando o meio ambiente com substâncias tóxicas.</p>
+        </div>
+        <div class="s-problem-right">
+          <div class="problem-card glass-card reveal">
+            <div class="pc-num">01</div>
+            <div class="pc-body">
+              <h3>Vida útil muito curta</h3>
+              <p>Um computador tem vida útil de ~3 anos. Um celular, ~2 anos. O descarte é constante e volumoso.</p>
+            </div>
+            <div class="pc-icon">⏱</div>
+          </div>
+          <div class="problem-card glass-card reveal">
+            <div class="pc-num">02</div>
+            <div class="pc-body">
+              <h3>Obsolescência programada</h3>
+              <p>Empresas definem um "prazo de validade" para seus produtos, incentivando o consumo acelerado.</p>
+            </div>
+            <div class="pc-icon">🔄</div>
+          </div>
+          <div class="problem-card glass-card reveal">
+            <div class="pc-num">03</div>
+            <div class="pc-body">
+              <h3>Descarte incorreto</h3>
+              <p>Misturado ao lixo comum, contamina solo, ar e água com metais pesados e substâncias tóxicas.</p>
+            </div>
+            <div class="pc-icon">⚠️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. EXEMPLOS -->
+  <section class="slide" data-section="Exemplos" data-sub="Tipos de e-lixo">
+    <div class="slide-inner s-features" style="gap:5vmin;justify-content:center">
+      <div class="s-features-head">
+        <div class="sf-l">
+          <div class="eyebrow reveal"><span class="dt"></span>Exemplos de e-lixo</div>
+          <h2 class="h-display reveal">Tudo que liga na tomada <span class="grd">pode virar e-lixo.</span></h2>
+        </div>
+        <p class="sf-r reveal">Aparelhos do dia a dia geram toneladas de resíduos tóxicos quando descartados sem cuidado. Confira os mais comuns.</p>
+      </div>
+      <div class="examples-grid">
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">📱</div>
+          <h3>Celulares e Chips</h3>
+          <p>Smartphones e chips contêm ouro, prata e chumbo. São os mais descartados incorretamente no Brasil.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">💻</div>
+          <h3>Computadores</h3>
+          <p>Notebooks e desktops. Um único laptop exige <strong style="color:var(--yellow-soft)">50 mil litros d'água</strong> em sua fabricação.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">🖥</div>
+          <h3>Monitores e TVs</h3>
+          <p>Monitores CRT e TVs de tubo contêm grandes quantidades de chumbo em seu vidro.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">⌨️</div>
+          <h3>Periféricos</h3>
+          <p>Teclados, mouses, fios e cabos acumulam plásticos e metais de difícil decomposição.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">📸</div>
+          <h3>Câmeras Fotográficas</h3>
+          <p>Câmeras digitais obsoletas acumulam baterias de lítio e componentes eletrônicos tóxicos.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">🔋</div>
+          <h3>Baterias</h3>
+          <p>Um dos itens mais perigosos: contêm cádmio, chumbo e ácido sulfúrico que contaminam o lençol freático.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">🖨️</div>
+          <h3>Impressoras</h3>
+          <p>Cartuchos e placas contêm tintas e metais que se tornam altamente tóxicos em aterros sanitários.</p>
+        </div>
+        <div class="ex-card glass-card reveal">
+          <div class="ex-icon">🏠</div>
+          <h3>Eletroportáteis</h3>
+          <p>Liquidificadores, secadores, batedeiras — aparelhos domésticos que também geram resíduos eletrônicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MEIO AMBIENTE -->
+  <section class="slide" data-section="Meio Ambiente" data-sub="Impactos ambientais">
+    <div class="slide-inner s-env" style="gap:4vmin;justify-content:center">
+      <div>
+        <div class="eyebrow reveal"><span class="dt"></span>Impactos ambientais</div>
+        <h2 class="h-display reveal">Um único laptop: <span class="grd">50 mil litros</span> de água para nascer.</h2>
+        <p class="body-lg reveal" style="max-width:720px;margin-top:14px">O lixo eletrônico consume recursos naturais enormes em sua produção e, descartado incorretamente, destrói o ambiente que o criou.</p>
+      </div>
+      <div class="env-grid">
+        <div class="env-card glass-card reveal">
+          <div class="ev-ic">🌊</div>
+          <h3>Poluição da Água</h3>
+          <p>Metais pesados como mercúrio, chumbo e arsênio lixiviam no solo e contaminam rios e lençóis freáticos, tornando a água imprópria para consumo e destruindo ecossistemas aquáticos.</p>
+          <span class="env-stat">⚠ Alta gravidade</span>
+        </div>
+        <div class="env-card glass-card reveal">
+          <div class="ev-ic">🌍</div>
+          <h3>Contaminação do Solo</h3>
+          <p>Aterros com e-lixo liberam substâncias tóxicas que tornam o solo infértil por décadas. Estudos apontam que solo e cursos d'água de regiões de reciclagem informal já estão gravemente contaminados.</p>
+          <span class="env-stat">⚠ Persistente</span>
+        </div>
+        <div class="env-card glass-card reveal">
+          <div class="ev-ic">💨</div>
+          <h3>Poluição do Ar</h3>
+          <p>A queima informal de e-lixo para recuperar metais valiosos libera dioxinas, furanos e partículas tóxicas no ar, contribuindo para chuva ácida e problemas respiratórios em comunidades próximas.</p>
+          <span class="env-stat">⚠ Imediato</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SAÚDE HUMANA -->
+  <section class="slide" data-section="Saúde Humana" data-sub="Impactos à saúde">
+    <div class="slide-inner s-health">
+      <div class="s-health-head">
+        <div class="eyebrow reveal"><span class="dt"></span>Impactos à saúde humana</div>
+        <h2 class="h-display reveal">Mais de <span class="grd">1.000 substâncias</span> nocivas. Uma vida inteira de consequências.</h2>
+        <p class="body-lg reveal">Trabalhadores e comunidades próximas a lixões eletrônicos são expostos a um coquetel de toxinas que afeta desde fetos em desenvolvimento até adultos e idosos.</p>
+      </div>
+      <div class="health-grid">
+        <div class="health-card glass-card reveal">
+          <div class="hc-tag">Gestantes & Bebês</div>
+          <h3>Impactos na gestação e infância</h3>
+          <p>A exposição ao lixo eletrônico tóxico pode afetar o desenvolvimento fetal. Os efeitos incluem natimortos, prematuridade, baixo peso ao nascer e alterações na função da tireoide infantil.</p>
+        </div>
+        <div class="health-card glass-card reveal">
+          <div class="hc-tag">Sistema Nervoso</div>
+          <h3>Danos neurológicos pelo chumbo</h3>
+          <p>A exposição ao chumbo está associada a redução dos escores cognitivos e linguísticos, aumento do TDAH, problemas comportamentais, mudanças de temperamento e dificuldades de integração sensorial.</p>
+        </div>
+        <div class="health-card glass-card reveal">
+          <div class="hc-tag">Aparelho Respiratório</div>
+          <h3>Efeitos pulmonares e respiratórios</h3>
+          <p>Partículas tóxicas liberadas na queima de e-lixo causam alterações na função pulmonar, inflamações respiratórias crônicas e danos ao DNA de trabalhadores e moradores próximos a aterros informais.</p>
+        </div>
+        <div class="health-card glass-card reveal">
+          <div class="hc-tag">Longo Prazo</div>
+          <h3>Doenças crônicas tardias</h3>
+          <p>A exposição prolongada a hidrocarbonetos policíclicos aromáticos (HPA), retardantes de chamas bromados e metais pesados aumenta o risco de câncer e doenças cardiovasculares.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RECICLAGEM -->
+  <section class="slide" data-section="Reciclagem" data-sub="Como funciona o processo">
+    <div class="slide-inner s-recycle">
+      <div class="s-recycle-head">
+        <div class="eyebrow reveal"><span class="dt"></span>O processo de reciclagem</div>
+        <h2 class="h-display reveal">50 milhões de toneladas por ano. Só <span class="grd">10 milhões</span> recicladas.</h2>
+        <p class="body-lg reveal" style="max-width:660px;margin-top:14px">A China recicla o maior volume, mas frequentemente por meio de exploração de pessoas — inclusive crianças e idosos. A cidade de Guiyu é símbolo desse problema global.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item now reveal">
+          <div class="tl-quarter">Etapa 1</div>
+          <div class="tl-status"><span class="s-dot"></span><span>Coleta seletiva</span></div>
+          <div class="tl-card">
+            <h3>Triagem & Coleta</h3>
+            <ul>
+              <li>Pontos de coleta autorizados</li>
+              <li>Separação por categorias</li>
+              <li>Transporte seguro</li>
+              <li>Cadastro e rastreamento</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-quarter">Etapa 2</div>
+          <div class="tl-status"><span class="s-dot"></span><span>Desmontagem</span></div>
+          <div class="tl-card">
+            <h3>Desmontagem Manual</h3>
+            <ul>
+              <li>Remoção de baterias</li>
+              <li>Separação de peças</li>
+              <li>Identificação de materiais</li>
+              <li>Triagem de componentes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-quarter">Etapa 3</div>
+          <div class="tl-status"><span class="s-dot"></span><span>Processamento</span></div>
+          <div class="tl-card">
+            <h3>Recuperação de Materiais</h3>
+            <ul>
+              <li>Extração de cobre e ouro</li>
+              <li>Fundição de metais</li>
+              <li>Tratamento de plásticos</li>
+              <li>Descarte seguro de tóxicos</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-quarter">Etapa 4</div>
+          <div class="tl-status"><span class="s-dot"></span><span>Reutilização</span></div>
+          <div class="tl-card">
+            <h3>Nova Vida</h3>
+            <ul>
+              <li>Metais voltam à produção</li>
+              <li>Plásticos reciclados</li>
+              <li>Geração de emprego</li>
+              <li>Redução do impacto</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FORMAS DE DESCARTE -->
+  <section class="slide" data-section="Descarte Correto" data-sub="Como descartar corretamente">
+    <div class="slide-inner s-disposal">
+      <div class="s-disposal-head">
+        <div class="eyebrow reveal"><span class="dt"></span>Formas corretas de descarte</div>
+        <h2 class="h-display reveal">Nunca misture com o <span class="grd">lixo comum.</span></h2>
+        <p class="body-lg reveal" style="max-width:680px;margin-top:14px">O e-lixo é dividido em 4 linhas de descarte. Cada uma tem pontos específicos de coleta. Veja abaixo:</p>
+      </div>
+      <div class="disposal-grid">
+        <div class="disposal-card glass-card verde reveal">
+          <div class="dc-circle">💻</div>
+          <div class="dc-line">Linha Verde</div>
+          <h3>Verde</h3>
+          <p>Celulares, computadores, tablets, acessórios e periféricos eletrônicos.</p>
+        </div>
+        <div class="disposal-card glass-card marrom reveal">
+          <div class="dc-circle">📺</div>
+          <div class="dc-line">Linha Marrom</div>
+          <h3>Marrom</h3>
+          <p>Monitores, TVs de tubo e televisores de tela plana.</p>
+        </div>
+        <div class="disposal-card glass-card azul reveal">
+          <div class="dc-circle">🔌</div>
+          <div class="dc-line">Linha Azul</div>
+          <h3>Azul</h3>
+          <p>Eletroportáteis: liquidificadores, batedeiras, secadores e similares.</p>
+        </div>
+        <div class="disposal-card glass-card branco reveal">
+          <div class="dc-circle">🏠</div>
+          <div class="dc-line">Linha Branca</div>
+          <h3>Branca</h3>
+          <p>Geladeiras, fogões, máquinas de lavar e grandes eletrodomésticos.</p>
+        </div>
+      </div>
+      <div class="disposal-warn glass-card reveal">
+        <div class="dw-ic">⛔</div>
+        <p>Para descartar o lixo eletrônico corretamente, <strong style="color:#f87171">nunca</strong> misture com o lixo comum ou reciclável doméstico. Esses itens contêm metais pesados — como mercúrio e chumbo — que contaminam o solo e a água quando descartados incorretamente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CURIOSIDADES E DADOS -->
+  <section class="slide" data-section="Dados & Curiosidades" data-sub="Estatísticas importantes">
+    <div class="slide-inner s-metrics">
+      <div class="s-metrics-head">
+        <div class="eyebrow reveal"><span class="dt"></span>Dados & Curiosidades</div>
+        <h2 class="h-display reveal">O Brasil no <span class="grd">ranking mundial</span> do e-lixo.</h2>
+      </div>
+      <div class="metric-grid">
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">🌍</div>
+          <div class="metric-num grd">5º</div>
+          <div class="metric-lbl">maior produtor de lixo eletrônico do mundo — e 1º da América Latina</div>
+        </div>
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">⚖️</div>
+          <div class="metric-num grd">2,4<span class="unit">Mi/t</span></div>
+          <div class="metric-lbl">toneladas de e-lixo geradas pelo Brasil por ano</div>
+        </div>
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">♻️</div>
+          <div class="metric-num grd">3–4<span class="unit">%</span></div>
+          <div class="metric-lbl">apenas dessa produção é descartada e reciclada corretamente no Brasil</div>
+        </div>
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">📦</div>
+          <div class="metric-num grd">60<span class="unit">%</span></div>
+          <div class="metric-lbl">dos brasileiros guardam eletrônicos velhos ou quebrados em casa sem uso — o "Museu de Gaveta"</div>
+        </div>
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">❓</div>
+          <div class="metric-num grd">49<span class="unit">%</span></div>
+          <div class="metric-lbl">da população não sabe como ou onde descartar esses itens de forma segura</div>
+        </div>
+        <div class="metric glass-card reveal">
+          <div class="metric-icon">🌐</div>
+          <div class="metric-num grd">50<span class="unit">Mi/t</span></div>
+          <div class="metric-lbl">de lixo eletrônico produzido anualmente no mundo inteiro</div>
+        </div>
+      </div>
+      <div class="s-metrics-bottom">
+        <div class="mb-fact glass-card reveal">
+          <div class="mbf-icon">🇺🇸</div>
+          <p>Nos EUA, cerca de <strong>300 milhões</strong> de aparelhos eletrônicos são descartados anualmente — e <strong>6 em cada 10</strong> ainda estão em perfeitas condições de funcionamento.</p>
+        </div>
+        <div class="mb-fact glass-card reveal">
+          <div class="mbf-icon">🇨🇳</div>
+          <p>A cidade de <strong>Guiyu, na China</strong>, tem seu solo e cursos d'água contaminados pelo excesso de reciclagem informal, onde inclusive crianças trabalham na separação de resíduos tóxicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. REFERÊNCIAS / CTA -->
+  <section class="slide" data-section="Referências" data-sub="Fontes bibliográficas">
+    <div class="slide-inner s-cta">
+      <div class="s-cta-inner">
+        <div class="s-cta-glow"></div>
+        <div class="eyebrow reveal"><span class="dt"></span>Conclusão</div>
+        <h2 class="h-display reveal">Recicle. <span class="grd">O planeta</span> agradece.</h2>
+        <p class="body-lg reveal" style="max-width:660px">A melhor forma de combater o lixo eletrônico é a informação. Descarte corretamente, consuma com consciência e compartilhe esse conhecimento.</p>
+        <div class="s-cta-row reveal">
+          <a class="btn-primary" id="backToStart">Rever desde o início &uarr;</a>
+          <a class="btn-secondary" href="https://www.reciclagembrasil.com.br/" target="_blank" rel="noopener">Encontre um ponto de coleta &rarr;</a>
+        </div>
+        <div class="s-cta-refs reveal">
+          <h4>Referências Bibliográficas</h4>
+          <div class="ref-item"><span class="ref-dot"></span><a href="https://www.todamateria.com.br/" target="_blank" rel="noopener">www.todamateria.com.br</a> — Artigos sobre lixo eletrônico e meio ambiente</div>
+          <div class="ref-item"><span class="ref-dot"></span><a href="https://www.paho.org/pt/noticias/" target="_blank" rel="noopener">www.paho.org/pt/noticias</a> — OPAS/OMS: impactos do e-lixo na saúde humana</div>
+          <div class="ref-item"><span class="ref-dot"></span><a href="https://www.reciclagembrasil.com.br/" target="_blank" rel="noopener">www.reciclagembrasil.com.br</a> — Pontos de coleta e reciclagem no Brasil</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /deck -->
+
+<!-- Menu overlay -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-header">
+      <h3>Índice de slides</h3>
+      <div class="menu-meta">♻ E-WASTE · 2025</div>
+    </div>
+    <div class="menu-list" id="menuList"></div>
+    <div class="menu-footer">
+      <span>Use ← → para navegar</span>
+      <span>ESC para fechar</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const sectionEl = document.getElementById('sectionName');
+  const curEl = document.getElementById('cur');
+  const totEl = document.getElementById('tot');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuPanel = document.getElementById('menuPanel');
+  const menuList = document.getElementById('menuList');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let cur = 0;
+  const total = slides.length;
+  totEl.textContent = total;
+
+  // Build menu
+  slides.forEach((s, i) => {
+    const item = document.createElement('div');
+    item.className = 'menu-item' + (i === 0 ? ' current' : '');
+    item.innerHTML = `
+      <span class="mi-num">0${i+1}</span>
+      <span class="mi-text">
+        <div class="mi-label">${s.dataset.section || 'Slide '+(i+1)}</div>
+        ${s.dataset.sub ? `<div class="mi-sub">${s.dataset.sub}</div>` : ''}
+      </span>
+      <span class="mi-arr">→</span>`;
+    item.addEventListener('click', () => { goTo(i); closeMenu(); });
+    menuList.appendChild(item);
+  });
+
+  function updateMenu(){
+    menuList.querySelectorAll('.menu-item').forEach((el,i)=>{
+      el.classList.toggle('current', i===cur);
+    });
+  }
+
+  function goTo(idx){
+    if(idx < 0 || idx >= total || idx === cur) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exiting');
+    setTimeout(()=>{ slides[cur].classList.remove('exiting'); }, 950);
+    cur = idx;
+    slides[cur].classList.add('active');
+    slides[cur].scrollTop = 0;
+    curEl.textContent = cur + 1;
+    sectionEl.textContent = slides[cur].dataset.section || '';
+    updateMenu();
+  }
+
+  function openMenu(){
+    menuOverlay.classList.add('open');
+    menuPanel.classList.add('open');
+    menuBtn.classList.add('open');
+  }
+  function closeMenu(){
+    menuOverlay.classList.remove('open');
+    menuPanel.classList.remove('open');
+    menuBtn.classList.remove('open');
+  }
+
+  menuBtn.addEventListener('click', ()=>{ menuOverlay.classList.contains('open') ? closeMenu() : openMenu(); });
+  menuOverlay.addEventListener('click', e=>{ if(e.target===menuOverlay) closeMenu(); });
+  prevBtn.addEventListener('click', ()=> goTo(cur - 1));
+  nextBtn.addEventListener('click', ()=> goTo(cur + 1));
+
+  // Keyboard
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') goTo(cur+1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(cur-1);
+    if(e.key==='Escape') closeMenu();
+  });
+
+  // Touch swipe
+  let tx=0, ty=0;
+  document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; ty=e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', e=>{
+    const dx=tx-e.changedTouches[0].clientX, dy=ty-e.changedTouches[0].clientY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+      if(dx>0) goTo(cur+1); else goTo(cur-1);
+    }
+  }, {passive:true});
+
+  // CTA buttons
+  document.getElementById('coverStart')?.addEventListener('click', ()=> goTo(1));
+  document.getElementById('coverRefs')?.addEventListener('click', ()=> goTo(8));
+  document.getElementById('backToStart')?.addEventListener('click', ()=> goTo(0));
+
+  // goto attribute buttons
+  document.querySelectorAll('[data-goto]').forEach(el=>{
+    el.addEventListener('click', ()=> goTo(parseInt(el.dataset.goto)-1));
+  });
+})();
+</script>
+</body>
+</html>
